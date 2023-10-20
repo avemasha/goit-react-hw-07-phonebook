@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
-import { addContacts } from '../store/contactsSlice';
+import { addContacts } from '../store/operations';
 import { Formik } from 'formik';
-import {Notify} from 'notiflix';
-import { useSelector } from 'react-redux/es/hooks/useSelector';
+
+
 
 import { Input, Forma, Label, Button, ErMessage } from './PhonebookForm.styled';
 
@@ -14,16 +14,11 @@ const formValues = {
 
 export const PhonebookForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.contacts);
+ 
 
 
   const handleSubmit = (values, { resetForm }) => {
-    const isContactExists = contacts.some(contact => contact.text.name.toLowerCase() === values.name.toLowerCase());
-    
-    if(isContactExists){
-     return Notify.failure('Oops, this contact already exists.')
-      
-    }
+   
 
     dispatch(addContacts(values));
     resetForm();

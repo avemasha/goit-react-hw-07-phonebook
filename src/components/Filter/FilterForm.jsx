@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { getFilter } from '../store/selectors';
 import { useDispatch } from 'react-redux';
-import { addFilter } from '../store/filterSlice';
+import { addFilter } from '../store/contactsSlice';
 import { Input, Label,  } from './FilterForm.styled';
 
 

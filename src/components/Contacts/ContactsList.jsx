@@ -18,7 +18,7 @@ const filtered = (contacts, filter) => {
   const normalizedFilter = filter.toLowerCase();
 
   filterContacts = contacts.filter(contact =>
-    contact.text.name.toLowerCase().includes(normalizedFilter)
+    contact.name.toLowerCase().includes(normalizedFilter)
   );
   if (filterContacts.length < 1) {
     Notify.warning('No matches =(');

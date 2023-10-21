@@ -9,7 +9,7 @@ import { Input, Forma, Label, Button, ErMessage } from './PhonebookForm.styled';
 
 const formValues = {
   name: '',
-  number: '',
+  phone: '',
 };
 
 export const PhonebookForm = () => {
@@ -46,12 +46,12 @@ export const PhonebookForm = () => {
           Number
           <Input
             type="tel"
-            name="number"
+            name="phone"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
           />
-          <ErMessage name="number" component="p" />
+          <ErMessage name="phone" component="p" />
         </Label>
         <Button type="submit">Add contact</Button>
       </Forma>

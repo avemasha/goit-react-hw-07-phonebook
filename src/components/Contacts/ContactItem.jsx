@@ -7,7 +7,7 @@ export const ContactItem = ({ id, name, number }) => {
     const dispatch = useDispatch();
     return (
       <Item>
-        {name}:{number}
+       <span>{name}</span>:<span>{number}</span>
         <Button onClick={() => dispatch(deleteContact(id))} type="button">
           Delete
         </Button>

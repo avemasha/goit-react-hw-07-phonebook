@@ -1,20 +1,27 @@
-import { useSelector } from 'react-redux';
-import { getFilter } from '../store/selectors';
-import { useDispatch } from 'react-redux';
-import { addFilter } from '../store/contactsSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectFilter } from '../store/selectors'; 
+
+
+import { changeFilter } from '../store/filterSlice';
 import { Input, Label  } from './FilterForm.styled';
 
 
 export const FilterForm = () => {
-  const filter = useSelector(getFilter);
+  const value = useSelector(selectFilter);
+
   const dispatch = useDispatch();
-  const changeFilter = e => {
-    dispatch(addFilter(e.currentTarget.value));
+
+  const onChange = event => {
+    const normalizedValue = event.target.value.toLowerCase();
+
+    dispatch(changeFilter(normalizedValue));
   };
+
+
   return (
  <Label>
   Enter contact name
-   <Input type="text" value={filter.filter} onChange={changeFilter}></Input>
+   <Input type="text" value={value} onChange={onChange}></Input>
  </Label>
  
    

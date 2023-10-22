@@ -1,11 +1,9 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContacts } from '../store/operations';
 import { Formik } from 'formik';
-
-
-
+import { Notify } from 'notiflix';
 import { Input, Forma, Label, Button, ErMessage } from './PhonebookForm.styled';
-
+import { selectContacts } from 'components/store/selectors';
 
 const formValues = {
   name: '',
@@ -14,22 +12,29 @@ const formValues = {
 
 export const PhonebookForm = () => {
   const dispatch = useDispatch();
- 
+const contacts = useSelector(selectContacts);
 
+const isContactExists = (newContact) => {
+  return contacts.some(
+    (contact) =>
+      contact.name.toLowerCase() === newContact.name.toLowerCase() ||
+      contact.phone === newContact.phone
+  );
+};
 
   const handleSubmit = (values, { resetForm }) => {
-   
+    if (isContactExists(values)) {
+      Notify.warning
+      ('Contact with the same name or phone number already exists!');
+    } else {
+      dispatch(addContacts(values));
+    }
 
-    dispatch(addContacts(values));
     resetForm();
   };
 
   return (
-    <Formik
-      initialValues={formValues}
-     
-      onSubmit={handleSubmit}
-    >
+    <Formik initialValues={formValues} onSubmit={handleSubmit}>
       <Forma autoComplete="off">
         <Label htmlFor="name">
           Name
@@ -57,11 +62,4 @@ export const PhonebookForm = () => {
       </Forma>
     </Formik>
   );
-  
-
-  
 };
-
-
-
-
